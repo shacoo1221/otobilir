@@ -1,0 +1,16 @@
+[
+  {
+    "id": "u1",
+    "name": "Test Kullanıcı",
+    "email": "test@otobilir.dev",
+    "password": "password",
+    "avatar": "/images/placeholder.svg"
+  },
+  {
+    "id": "u1771126633796oeq2",
+    "name": "burak",
+    "email": "shacoo1221@hotmail.com",
+    "password": "ellezi",
+    "avatar": "/images/placeholder.svg"
+  }
+]

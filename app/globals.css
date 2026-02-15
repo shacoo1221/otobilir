@@ -1,0 +1,250 @@
+/* Import a modern font for headings */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@600;700;800&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --color-primary: #1E3A8A; /* Derin Okyanus Mavisi */
+  --color-secondary: #F59E0B; /* Kehribar */
+  --color-bg: #F3F4F6;
+  --color-surface: #FFFFFF;
+}
+
+html, body, :root {
+  height: 100%;
+}
+
+body {
+  background-color: var(--color-bg);
+  color: #0f172a;
+  font-family: Inter, ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.container {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 0 1rem;
+}
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.5rem 1rem;
+  border-radius: 0.375rem;
+  font-weight: 600;
+}
+
+.btn-primary {
+  background-color: var(--color-primary);
+  color: white;
+}
+
+.btn-ghost {
+  background: transparent;
+  color: var(--color-primary);
+  border: 1px solid rgba(30,58,138,0.08);
+}
+
+.badge {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.25rem 0.5rem;
+  font-size: 0.875rem;
+  font-weight: 600;
+  border-radius: 9999px;
+}
+
+/* Simple utilities for cards and inputs */
+.card {
+  background: var(--color-surface);
+  border-radius: 0.5rem;
+  box-shadow: 0 6px 18px rgba(15, 23, 42, 0.06);
+  padding: 1rem;
+}
+/* Ensure hover lift for elements using the .card classname */
+.card {
+  transition: transform 180ms ease, box-shadow 180ms ease;
+  transform: translateZ(0);
+}
+.card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 14px 30px rgba(15,23,42,0.12);
+}
+
+.rounded-avatar { border-radius: 9999px; overflow: hidden; }
+
+/* Hero styles */
+.hero-title {
+  font-family: "Poppins", Inter, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+  letter-spacing: -0.02em;
+}
+
+.search-input {
+  width: 100%;
+  max-width: 720px;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+.search-input input {
+  flex: 1;
+  padding: 0.75rem 1rem;
+  border-radius: 9999px;
+  border: 1px solid rgba(15,23,42,0.08);
+  background: white;
+  font-size: 1rem;
+}
+.search-input .search-btn {
+  background: var(--color-primary);
+  color: white;
+  padding: 0.6rem 0.9rem;
+  border-radius: 9999px;
+  font-weight: 700;
+  border: none;
+}
+
+/* Comparison matrix styles */
+.cmp-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+.cmp-table th {
+  text-align: left;
+  padding: 12px;
+  color: #0f172a;
+}
+.cmp-table td {
+  padding: 12px;
+  vertical-align: middle;
+}
+.cmp-table tbody tr:hover td {
+  background: rgba(15,23,42,0.04);
+}
+.cmp-label {
+  background: rgba(15,23,42,0.04);
+  font-weight: 600;
+}
+.cell-good {
+  background: rgba(16,185,129,0.12);
+  color: #047857;
+  font-weight: 700;
+}
+.cell-bad {
+  background: rgba(239,68,68,0.08);
+  color: #b91c1c;
+  font-weight: 700;
+}
+.cell-neutral {
+  background: rgba(15,23,42,0.03);
+  color: #374151;
+}
+.big-score {
+  font-size: 2rem;
+  font-weight: 800;
+  color: var(--color-primary);
+}
+
+/* Image defaults to prevent oversized SVGs */
+img {
+  max-width: 100%;
+  height: auto;
+  display: inline-block;
+}
+
+/* Logo and mascot sizes */
+.logo {
+  height: 32px;
+  width: auto;
+}
+.mascot {
+  height: 48px;
+  width: 48px;
+  border-radius: 9999px;
+  overflow: hidden;
+}
+
+/* Skeleton loaders */
+.skeleton {
+  background: linear-gradient(90deg, rgba(255,255,255,0.06) 0%, rgba(255,255,255,0.12) 50%, rgba(255,255,255,0.06) 100%);
+  background-size: 200% 100%;
+  animation: skeleton-shimmer 1.2s linear infinite;
+  border-radius: 6px;
+}
+.skeleton-rect { height: 100%; width: 100%; min-height: 40px; }
+.skeleton-circle { width: 48px; height: 48px; border-radius: 9999px; }
+
+@keyframes skeleton-shimmer {
+  0% { background-position: 200% 0; }
+  100% { background-position: -200% 0; }
+}
+
+/* Page fade-in transition */
+.page-fade {
+  animation: page-fade-in 220ms ease;
+}
+@keyframes page-fade-in {
+  from { opacity: 0; transform: translateY(6px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* Sticky compare header */
+.cmp-sticky {
+  position: sticky;
+  top: 0;
+  z-index: 60;
+  background: rgba(255,255,255,0.95);
+  padding: 10px 12px;
+  border-radius: 8px;
+  box-shadow: 0 6px 18px rgba(15,23,42,0.06);
+  width: 100%;
+}
+.cmp-sticky img { display: inline-block; }
+.cmp-sticky .font-semibold { font-weight: 700; }
+/* Floating variant applied by JS when scrolled */
+.cmp-sticky--floating {
+  position: fixed;
+  top: 12px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 80;
+  width: calc(100% - 2rem);
+  max-width: 1100px;
+  border-radius: 8px;
+}
+
+/* Page transition (controlled by PageTransition component) */
+.page-transition {
+  transition: opacity 220ms cubic-bezier(.2,.9,.2,1);
+  will-change: opacity;
+}
+.pt-show { opacity: 1; }
+.pt-hide { opacity: 0; pointer-events: none; }
+
+/* Autocomplete dropdown item focus/hover */
+.autocomplete-item { transition: background 120ms ease, transform 120ms ease; }
+.autocomplete-item:hover, .autocomplete-item[aria-selected="true"] { background: #f8fafc; transform: translateX(2px); }
+
+/* Responsive sticky header tweaks */
+.cmp-sticky { gap: 8px; }
+@media (max-width: 640px) {
+  .cmp-sticky { padding: 8px; border-radius: 0; box-shadow: 0 6px 18px rgba(15,23,42,0.06); }
+  .cmp-sticky .font-semibold { font-size: 13px; }
+  .cmp-sticky img { width: 44px; height: 32px; }
+}
+
+/* Tooltip */
+.tooltip { position: relative; display: inline-flex; align-items: center; gap: 6px; }
+.tooltip .tooltip-dot { width: 18px; height: 18px; border-radius: 50%; background: var(--color-primary); color: white; display:inline-flex; align-items:center; justify-content:center; font-size:12px; cursor:help; }
+.tooltip .tooltip-text { position: absolute; left: 50%; transform: translateX(-50%); bottom: calc(100% + 8px); background: rgba(0,0,0,0.8); color: white; padding: 6px 8px; border-radius:6px; font-size:12px; white-space:nowrap; opacity:0; pointer-events:none; transition: opacity .15s ease; }
+.tooltip:hover .tooltip-text { opacity: 1; pointer-events:auto; }
+
+/* Toasts */
+.toast { background: white; padding: 12px 14px; border-radius: 8px; box-shadow: 0 8px 20px rgba(15,23,42,0.08); border-left: 4px solid transparent; }
+.toast-success { border-left-color: #10b981; }
+.toast-error { border-left-color: #ef4444; }
+

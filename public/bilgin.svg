@@ -1,0 +1,16 @@
+<svg viewBox="0 0 120 120" fill="none" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid meet">
+  <rect width="120" height="120" rx="20" fill="#F59E0B"/>
+  <!-- owl body -->
+  <g transform="translate(20,20)" fill="#fff">
+    <ellipse cx="40" cy="40" rx="34" ry="36"/>
+  </g>
+  <!-- glasses -->
+  <g transform="translate(24,34)" fill="none" stroke="#1E3A8A" stroke-width="3">
+    <circle cx="12" cy="12" r="10"/>
+    <circle cx="44" cy="12" r="10"/>
+    <path d="M22 12 H34" />
+  </g>
+  <!-- beak -->
+  <polygon points="60,62 54,74 66,74" fill="#1E3A8A"/>
+</svg>
+
