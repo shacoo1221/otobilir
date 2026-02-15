@@ -117,37 +117,6 @@ export default function ProfilePage() {
       const j = await res.json()
       console.log("PUT /api/profile status", res.status, j)
       if (!res.ok) {
-        // if unauthorized and we have session user id, try dev-save fallback (dev only)
-        if (res.status === 401 && session && (session as any).user?.id) {
-          try {
-            const devRes = await fetch("/api/profile/dev-save", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ userId: (session as any).user.id, name: form.name, age: Number(form.age), gender: form.gender, bio: form.bio, phone: (form as any).phone || "" }) })
-            const dj = await devRes.json()
-            if (devRes.ok) {
-              setProfile(dj.profile)
-              setForm({
-                name: dj.profile?.name || "",
-                age: dj.profile?.age != null ? String(dj.profile.age) : "",
-                gender: dj.profile?.gender || "",
-                bio: dj.profile?.bio || "",
-                phone: dj.profile?.phone || "",
-                avatar: dj.profile?.avatar || "",
-              })
-              setSuccess("Profil kaydedildi (dev-fallback)")
-              setTimeout(() => {
-                setSuccess(null)
-                window.location.href = "/"
-              }, 600)
-              return
-            } else {
-              alert(dj?.error || "Profil kaydedilemedi (dev-fallback)")
-              return
-            }
-          } catch (err) {
-            console.error("dev-save failed", err)
-            alert("Yetkilendirme hatası ve dev-fallback başarısız")
-            return
-          }
-        }
         alert(j?.error || "Profil kaydedilemedi")
       } else {
         setProfile(j.profile)
@@ -322,7 +291,7 @@ export default function ProfilePage() {
                   const dataUrl = reader.result as string
                   setUploadProgress(60)
                   try {
-                    const res = await fetch("/api/upload", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ filename: f.name, dataUrl }) })
+                    const res = await fetch("/api/upload", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ filename: f.name, dataUrl }), credentials: "include" })
                     const j = await res.json()
                     if (!res.ok) {
                       setUploadProgress(null)
