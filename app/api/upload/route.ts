@@ -2,6 +2,8 @@ import { NextResponse } from "next/server"
 import fs from "fs"
 import path from "path"
 import { v2 as cloudinary } from "cloudinary"
+import { getServerSession } from "next-auth/next"
+import { authOptions } from "@/lib/auth"
 
 if (process.env.CLOUDINARY_URL) {
   // cloudinary is automatically configured from CLOUDINARY_URL
@@ -21,6 +23,14 @@ function ensureUploads() {
 
 export async function POST(req: Request) {
   try {
+    // require authenticated user in production
+    try {
+      const session = await getServerSession(authOptions as any)
+      if (!session) return NextResponse.json({ error: "Unauthorized" }, { status: 401 })
+    } catch (e) {
+      // if getServerSession fails, deny
+      return NextResponse.json({ error: "Unauthorized" }, { status: 401 })
+    }
     const body = await req.json()
     const { filename, dataUrl } = body
     if (!filename || !dataUrl) return NextResponse.json({ error: "Missing" }, { status: 400 })
