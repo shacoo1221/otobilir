@@ -2,7 +2,7 @@ import { NextResponse } from "next/server"
 import fs from "fs"
 import path from "path"
 import { v2 as cloudinary } from "cloudinary"
-import { getServerSession } from "next-auth/next"
+import { getToken } from "next-auth/jwt"
 import { authOptions } from "@/lib/auth"
 
 if (process.env.CLOUDINARY_URL) {
@@ -25,10 +25,9 @@ export async function POST(req: Request) {
   try {
     // require authenticated user in production
     try {
-      const session = await getServerSession(authOptions as any)
-      if (!session) return NextResponse.json({ error: "Unauthorized" }, { status: 401 })
+      const token = await getToken({ req: req as any, secret: process.env.NEXTAUTH_SECRET || authOptions.secret })
+      if (!token) return NextResponse.json({ error: "Unauthorized" }, { status: 401 })
     } catch (e) {
-      // if getServerSession fails, deny
       return NextResponse.json({ error: "Unauthorized" }, { status: 401 })
     }
     const body = await req.json()
